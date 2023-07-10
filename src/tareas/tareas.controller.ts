@@ -17,6 +17,15 @@ export class TareasController {
     return tarea;
   }
 
+  @Get(':id')
+  getTarea(@Param('id') id: number): Tarea {
+    const tarea = this.tareas.find((tarea) => tarea.id === id);
+    if (!tarea) {
+      throw new NotFoundException('Tarea no encontrada');
+    }
+    return tarea;
+  }
+
   @Put(':id')
   updateTarea(@Param('id') id: number, @Body() updatedTarea: Tarea): Tarea {
     const tarea = this.tareas.find((tarea) => tarea.id === id);
